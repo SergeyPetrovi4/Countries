@@ -37,7 +37,12 @@ class DetailsViewController: UIViewController {
             return
         }
         
-//        self.flagImageView
+        // MARK: - Using another service for showing flag of country
+        let countryAbbreviature = passedCountry.alpha2Code.lowercased()
+        if let url = URL(string: "https://www.countryflags.io/\(countryAbbreviature)/flat/64.png") {
+            self.flagImageView.kf.setImage(with: url)
+        }
+
         self.countryNameLabel.attributedText = NSMutableAttributedString().bold("Country: ").normal("\(passedCountry.name)", color: .black)
         self.countryNativeNameLabel.attributedText = NSMutableAttributedString().bold("Native name: ").normal("\(passedCountry.nativeName)", color: .black)
         self.capitalCityLabel.attributedText = NSMutableAttributedString().bold("Capital city: ").normal("\(passedCountry.capital)", color: .black)

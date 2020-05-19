@@ -22,7 +22,7 @@ class CountriesPresenter: CountriesPresenterProtocol {
     
     private func fetchCountries() {
         
-        let params = ["fields" : "name;flag;capital;timezones;nativeName;population;languages;translations"]
+        let params = ["fields" : "name;flag;capital;timezones;nativeName;population;languages;translations;alpha3Code;alpha2Code"]
         WebServiceManager.shared.fetch(service: .countries, params: params) { (result) in
             
             DispatchQueue.main.async {

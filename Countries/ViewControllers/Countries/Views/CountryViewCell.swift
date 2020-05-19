@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CountryViewCell: UITableViewCell {
     
@@ -44,9 +45,11 @@ class CountryViewCell: UITableViewCell {
         let timeZones = country.timezones.joined(separator: ", ")
         self.timeZone.text = "Time zones: \(timeZones)"
         
-//        if let url = URL(string: country.flag!) {
-//            print(country.flag)
-//        }
+        // MARK: - Using another service for showing flag of country
+        let countryAbbreviature = country.alpha2Code.lowercased()
+        if let url = URL(string: "https://www.countryflags.io/\(countryAbbreviature)/flat/64.png") {
+            self.flag.kf.setImage(with: url)
+        }
     }
     
     // MARK: - Action
