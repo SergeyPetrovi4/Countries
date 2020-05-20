@@ -15,5 +15,22 @@ protocol CountriesViewProtocol: class, RoutableProtocol {
 
 protocol CountriesPresenterProtocol {
     
+    func fetchCountries(service: NetworkServiceRepresentable)
     func updateFavorites(in countries: [Country])
+}
+
+enum CountriesService: NetworkServiceRepresentable {
+    case all
+    case search(String)
+    
+    var rawValue: String {
+        get {
+            switch self {
+            case .all:
+                return "all"
+            case .search(let text):
+                return "name/\(text)"
+            }
+        }
+    }
 }

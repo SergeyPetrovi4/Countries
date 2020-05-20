@@ -12,20 +12,18 @@ class CountriesPresenter: CountriesPresenterProtocol {
     
     weak var view: CountriesViewProtocol?
     
-    init(`for` view: CountriesViewProtocol, type: CountriesTableViewController.CountriesType) {
+    init(`for` view: CountriesViewProtocol) {
         self.view = view
-        
-        if type == .all {
-            self.fetchCountries()
-        }
     }
     
     // MARK: - Private
+
+    // MARK: - CountriesPresenterProtocol
     
-    private func fetchCountries() {
+    func fetchCountries(service: NetworkServiceRepresentable) {
         
         let params = ["fields" : "name;flag;capital;timezones;nativeName;population;languages;translations;alpha3Code;alpha2Code"]
-        WebServiceManager.shared.fetch(service: .countries, params: params) { (result) in
+        WebServiceManager.shared.fetch(service: service, params: params) { (result) in
             
             DispatchQueue.main.async {
                 switch result {
@@ -38,8 +36,6 @@ class CountriesPresenter: CountriesPresenterProtocol {
             }
         }
     }
-    
-    // MARK: - CountriesPresenterProtocol
     
     func updateFavorites(in countries: [Country]) {
         
