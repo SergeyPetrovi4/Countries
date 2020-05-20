@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-protocol CountriesViewProtocol: class, RoutableProtocol {
+protocol CountriesViewProtocol: RoutableProtocol, Alertable {
     
     func set(countries: [Country])
 }
@@ -19,17 +20,29 @@ protocol CountriesPresenterProtocol {
     func updateFavorites(in countries: [Country])
 }
 
-enum CountriesService: NetworkServiceRepresentable {
-    case all
-    case search(String)
+final class Alerts {
     
-    var rawValue: String {
-        get {
+    enum NetworkAlerts: ActionRepresentable {
+        case OK
+        case Retry
+        
+        var rawValue: (title: String, style: UIAlertAction.Style) {
             switch self {
-            case .all:
-                return "all"
-            case .search(let text):
-                return "name/\(text)"
+            case .OK:
+                return ("OK", .cancel)
+            case .Retry:
+                return ("Try again", .default)
+            }
+        }
+    }
+    
+    enum DataAlert: ActionRepresentable {
+        case OK
+        
+        var rawValue: (title: String, style: UIAlertAction.Style) {
+            switch self {
+            case .OK:
+                return ("OK", .default)
             }
         }
     }

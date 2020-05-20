@@ -31,7 +31,18 @@ class CountriesPresenter: CountriesPresenterProtocol {
                     self.updateFavorites(in: countries)
                     
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.view?.showAlert(title: error.localizedDescription,
+                                         message: nil,
+                                         style: .alert,
+                                         actions: Alerts.NetworkAlerts.self,
+                                         completion: { (action) in
+                                            
+                            switch action {
+                            case .OK: return
+                            case .Retry:
+                                self.fetchCountries(service: service)
+                            }
+                    })
                 }
             }
         }

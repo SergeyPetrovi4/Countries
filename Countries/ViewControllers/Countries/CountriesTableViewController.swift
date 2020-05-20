@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RappleProgressHUD
 
 class CountriesTableViewController: UITableViewController, CountriesViewProtocol  {
     
@@ -31,6 +32,7 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
         self.presenter = CountriesPresenter(for: self)
         
         if self.type == .all {
+            RappleActivityIndicatorView.startAnimating()
             self.presenter.fetchCountries(service: CountriesService.all)
         }
     }
@@ -77,7 +79,11 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
                 // Updating country state in main list of countries
                 DispatchQueue.main.async {
                     guard let country = self.countries.filter({ $0.alpha3Code == id }).first else {
-                        print("Can`t update country state in main list of countries")
+                        self.showAlert(title: "Can`t update country state in main list of countries",
+                                       message: nil,
+                                       style: .alert,
+                                       actions: Alerts.DataAlert.self,
+                                       completion: nil)
                         return
                     }
                     
@@ -88,7 +94,11 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
             return
         }
         
-        print("Nothing to show. Please select favorites, and try again!")
+        self.showAlert(title: "Nothing to show. Please select favorites, and try again!",
+                        message: nil,
+                        style: .alert,
+                        actions: Alerts.DataAlert.self,
+                        completion: nil)
     }
     
     // MARK: - Private
@@ -97,6 +107,7 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
     
     func set(countries: [Country]) {
         
+        RappleActivityIndicatorView.stopAnimation()
         self.countries = countries
         self.tableView.reloadData()
     }
@@ -157,7 +168,11 @@ extension CountriesTableViewController: DetailsDelegate {
                                         .filter({ $0.element.alpha3Code == country.alpha3Code })
                                         .map({ $0.offset }).first else {
                                             
-            print("Can`t find and update object")
+            self.showAlert(title: "Can`t find and update object",
+                            message: nil,
+                            style: .alert,
+                            actions: Alerts.DataAlert.self,
+                            completion: nil)
             return
         }
         

@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol NetworkServiceRepresentable  {
-    var rawValue: (String) { get }
-}
-
 class WebServiceManager {
     
     enum NetworkErrors: Error {
