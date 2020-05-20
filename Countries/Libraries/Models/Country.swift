@@ -14,13 +14,12 @@ struct Country: Decodable {
     var capital: String
     var population: Int
     var flag: String
+    var alpha3Code: String
+    var alpha2Code: String
     
     var languages: [Language]
     var timezones: [String]
     
-    private enum CodingKeys: String, CodingKey {
-        case name, nativeName, capital, population, flag, languages, timezones, translations
-    }
     
     // MARK: - Parsing array of Key/Value
     private var translations: Country.List
@@ -28,7 +27,11 @@ struct Country: Decodable {
         return self.translations.values
     }
     
-    var isFavorite: Bool = false
+    var hasFavorited: Bool = false
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, nativeName, capital, population, flag, languages, timezones, alpha3Code, alpha2Code, translations
+    }
 }
 
 extension Country {

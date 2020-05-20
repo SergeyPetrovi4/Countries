@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Kingfisher
+
+typealias CompletionFavoriteHandler = ((IndexPath) -> Void)
 
 class CountryViewCell: UITableViewCell {
     
@@ -17,9 +20,12 @@ class CountryViewCell: UITableViewCell {
     @IBOutlet weak var flag: UIImageView!
     @IBOutlet weak var favoritesButton: UIButton!
     
+    private var indexPath: IndexPath!
+    private var completion: CompletionFavoriteHandler?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +36,10 @@ class CountryViewCell: UITableViewCell {
     
     // MARK: - Configuration
     
-    func configure(with country: Country) {
+    func configure(with country: Country, atIndexPath indexPath: IndexPath, completion: CompletionFavoriteHandler?) {
+        
+        self.indexPath = indexPath
+        self.completion = completion
         
         self.name.attributedText = NSMutableAttributedString()
                                     .bold("Country: ")
@@ -44,13 +53,18 @@ class CountryViewCell: UITableViewCell {
         let timeZones = country.timezones.joined(separator: ", ")
         self.timeZone.text = "Time zones: \(timeZones)"
         
-//        if let url = URL(string: country.flag!) {
-//            print(country.flag)
-//        }
+        // MARK: - Using another service for showing flag of country
+        let countryAbbreviature = country.alpha2Code.lowercased()
+        if let url = URL(string: "https://www.countryflags.io/\(countryAbbreviature)/flat/64.png") {
+            self.flag.kf.setImage(with: url)
+        }
+        
+        self.favoritesButton.setImage(UIImage(systemName: country.hasFavorited ? "star.fill" : "star"), for: .normal)
     }
     
     // MARK: - Action
     
     @IBAction func didTapAddRemoveFavoriteButton(_ sender: UIButton) {
+        self.completion?(self.indexPath)
     }    
 }

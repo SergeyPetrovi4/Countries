@@ -15,4 +15,5 @@ protocol CountriesViewProtocol: class, RoutableProtocol {
 
 protocol CountriesPresenterProtocol {
     
+    func updateFavorites(in countries: [Country])
 }
