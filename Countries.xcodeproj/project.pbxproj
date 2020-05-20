@@ -12,7 +12,7 @@
 		6730A5E224744ADB00AD7CCF /* RoutableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6730A5E124744ADB00AD7CCF /* RoutableProtocol.swift */; };
 		674F756B2473FF65000E1D2E /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674F756A2473FF65000E1D2E /* Translation.swift */; };
 		675D01382474698D006C43E9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 675D01372474698D006C43E9 /* Kingfisher */; };
-		6783B7AB2473143300F8271B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783B7A92473143300F8271B /* CoreDataManager.swift */; };
+		6783B7AB2473143300F8271B /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783B7A92473143300F8271B /* FavoritesManager.swift */; };
 		6783B7AD2473147A00F8271B /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783B7AC2473147A00F8271B /* WebServiceManager.swift */; };
 		6783B7AF2473154C00F8271B /* StoryboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783B7AE2473154C00F8271B /* StoryboardManager.swift */; };
 		6783B7B3247320AA00F8271B /* CountriesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6783B7B0247320AA00F8271B /* CountriesContract.swift */; };
@@ -33,7 +33,7 @@
 		6730A5DD2474447600AD7CCF /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		6730A5E124744ADB00AD7CCF /* RoutableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutableProtocol.swift; sourceTree = "<group>"; };
 		674F756A2473FF65000E1D2E /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
-		6783B7A92473143300F8271B /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6783B7A92473143300F8271B /* FavoritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		6783B7AC2473147A00F8271B /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 		6783B7AE2473154C00F8271B /* StoryboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardManager.swift; sourceTree = "<group>"; };
 		6783B7B0247320AA00F8271B /* CountriesContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesContract.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		67EE707F247311ED008A46B8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				6783B7A92473143300F8271B /* CoreDataManager.swift */,
+				6783B7A92473143300F8271B /* FavoritesManager.swift */,
 				6783B7AC2473147A00F8271B /* WebServiceManager.swift */,
 				6783B7AE2473154C00F8271B /* StoryboardManager.swift */,
 			);
@@ -296,7 +296,7 @@
 				674F756B2473FF65000E1D2E /* Translation.swift in Sources */,
 				67EE7068247310AD008A46B8 /* SceneDelegate.swift in Sources */,
 				6783B7B8247320CC00F8271B /* CountryViewCell.swift in Sources */,
-				6783B7AB2473143300F8271B /* CoreDataManager.swift in Sources */,
+				6783B7AB2473143300F8271B /* FavoritesManager.swift in Sources */,
 				6783B7BB2473231000F8271B /* Country.swift in Sources */,
 				6730A5DE2474447600AD7CCF /* DetailsViewController.swift in Sources */,
 				6783B7AF2473154C00F8271B /* StoryboardManager.swift in Sources */,

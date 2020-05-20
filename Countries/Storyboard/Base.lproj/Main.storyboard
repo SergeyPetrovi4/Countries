@@ -53,8 +53,8 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VZs-4S-Bk7">
-                                                    <rect key="frame" x="332" y="10" width="50" height="74"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VZs-4S-Bk7">
+                                                    <rect key="frame" x="332" y="1" width="50" height="92"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="israel" translatesAutoresizingMaskIntoConstraints="NO" id="drJ-6E-XJD">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="36"/>
@@ -64,11 +64,12 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50a-zo-6xI">
-                                                            <rect key="frame" x="10" y="44" width="30" height="30"/>
+                                                            <rect key="frame" x="5" y="52" width="40" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="Dch-tS-PlZ"/>
-                                                                <constraint firstAttribute="height" constant="30" id="Ocl-aH-HE2"/>
+                                                                <constraint firstAttribute="width" constant="40" id="Dch-tS-PlZ"/>
+                                                                <constraint firstAttribute="height" constant="40" id="Ocl-aH-HE2"/>
                                                             </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" image="star" catalog="system"/>
                                                             <connections>
                                                                 <action selector="didTapAddRemoveFavoriteButton:" destination="Nje-I8-w14" eventType="touchUpInside" id="L11-Vb-vxN"/>
@@ -182,6 +183,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="KMA-OC-Yjp"/>
                                                                 </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                 <state key="normal" title="Add to Favorites"/>
                                                                 <connections>
                                                                     <action selector="didTapAddOrRemoveFavoriteButton:" destination="bev-LA-4ue" eventType="touchUpInside" id="RCM-uH-jEP"/>
@@ -227,6 +229,7 @@
                         <outlet property="capitalCityLabel" destination="TlB-8m-9wV" id="2Ir-Uh-ICU"/>
                         <outlet property="countryNameLabel" destination="qzP-iy-2mR" id="saH-c7-kQK"/>
                         <outlet property="countryNativeNameLabel" destination="clb-np-ej1" id="uT9-xS-515"/>
+                        <outlet property="favoriteButton" destination="lPE-am-h2Q" id="Se3-yD-aI4"/>
                         <outlet property="flagImageView" destination="yWU-dB-NGi" id="PY1-In-EYM"/>
                         <outlet property="languagesLabel" destination="jOa-Uq-bE1" id="fcV-Lt-xS2"/>
                         <outlet property="populationLabel" destination="hBo-bU-ncF" id="Y0u-ax-flx"/>
