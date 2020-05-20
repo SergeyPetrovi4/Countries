@@ -17,15 +17,10 @@ class WebServiceManager {
     }
     
     static private let baseAPI = "https://restcountries.eu/rest/v2/"
-    
-    enum WebServiceAPI: String {
-        case countries = "all"
-    }
-    
     static let shared = WebServiceManager()
     private init() {}
     
-    func fetch(service: WebServiceAPI,
+    func fetch(service: NetworkServiceRepresentable,
                params parameters: [String: String],
                completion: @escaping ((Result<[Country], NetworkErrors>) -> Void)) {
         
@@ -69,8 +64,6 @@ class WebServiceManager {
 extension WebServiceManager {
     
     func decode<T: Decodable>(_ type: T.Type, fromData data: Data) throws -> T {
-
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
+        return try JSONDecoder().decode(T.self, from: data)
     }
 }

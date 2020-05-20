@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RappleProgressHUD
 
 class CountriesTableViewController: UITableViewController, CountriesViewProtocol  {
     
@@ -27,7 +28,13 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
         super.viewDidLoad()
         
         self.setupTableView()
-        self.presenter = CountriesPresenter(for: self, type: self.type)
+        self.setupUI()
+        self.presenter = CountriesPresenter(for: self)
+        
+        if self.type == .all {
+            RappleActivityIndicatorView.startAnimating()
+            self.presenter.fetchCountries(service: CountriesService.all)
+        }
     }
     
     // MARK: - UI, Private
@@ -37,15 +44,27 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
         self.title = self.type == .all ? "Countries" : "Favorites"
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44.0
+    }
+    
+    private func setupUI() {
         
-        if self.type == .all {
-            
-            let favoritesBarButtonItem = UIBarButtonItem(title: "Favorites",
-                                                         style: .plain,
-                                                         target: self,
-                                                         action: #selector(showFavoritesList(_:)))
-            self.navigationItem.rightBarButtonItem = favoritesBarButtonItem
+        if self.type == .favorites {
+            return
         }
+            
+        let favoritesBarButtonItem = UIBarButtonItem(title: "Favorites",
+                                                     style: .plain,
+                                                     target: self,
+                                                     action: #selector(showFavoritesList(_:)))
+        self.navigationItem.rightBarButtonItem = favoritesBarButtonItem
+        
+        // Search controller
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search..."
+        self.navigationItem.searchController = searchController
     }
     
     // MARK: - Actions
@@ -59,9 +78,12 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
                 
                 // Updating country state in main list of countries
                 DispatchQueue.main.async {
-
                     guard let country = self.countries.filter({ $0.alpha3Code == id }).first else {
-                        print("Can`t update country state in main list of countries")
+                        self.showAlert(title: "Can`t update country state in main list of countries",
+                                       message: nil,
+                                       style: .alert,
+                                       actions: Alerts.DataAlert.self,
+                                       completion: nil)
                         return
                     }
                     
@@ -72,7 +94,11 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
             return
         }
         
-        print("Nothing to show. Please select favorites, and try again!")
+        self.showAlert(title: "Nothing to show. Please select favorites, and try again!",
+                        message: nil,
+                        style: .alert,
+                        actions: Alerts.DataAlert.self,
+                        completion: nil)
     }
     
     // MARK: - Private
@@ -81,6 +107,7 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
     
     func set(countries: [Country]) {
         
+        RappleActivityIndicatorView.stopAnimation()
         self.countries = countries
         self.tableView.reloadData()
     }
@@ -134,12 +161,18 @@ class CountriesTableViewController: UITableViewController, CountriesViewProtocol
 
 extension CountriesTableViewController: DetailsDelegate {
     
+    // MARK: - DetailsDelegate
+    
     func update(country: Country) {
         guard let index = self.countries.enumerated()
                                         .filter({ $0.element.alpha3Code == country.alpha3Code })
                                         .map({ $0.offset }).first else {
                                             
-            print("Can`t find and update object")
+            self.showAlert(title: "Can`t find and update object",
+                            message: nil,
+                            style: .alert,
+                            actions: Alerts.DataAlert.self,
+                            completion: nil)
             return
         }
         
@@ -152,5 +185,23 @@ extension CountriesTableViewController: DetailsDelegate {
         }
         
         self.tableView.reloadData()
+    }
+}
+
+extension CountriesTableViewController: UISearchBarDelegate {
+    
+    // MARK: - UISearchBarDelegate
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let searchText = searchBar.text else {
+            return
+        }
+        
+        self.presenter.fetchCountries(service: CountriesService.search(searchText))
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.presenter.fetchCountries(service: CountriesService.all)
     }
 }
